@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — WildTomorrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --crimson:   #7a1a1a;
+      --crimson-lt:#9e2222;
+      --slate:     #4d7c8a;
+      --slate-lt:  #6aa3b5;
+      --near-black:#0d0d0d;
+      --off-white: #f0ece4;
+      --warm-gray: #c8c0b4;
+      --mid-gray:  #4a4540;
+      --card-bg:   #141210;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--near-black);
+      color: var(--off-white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--off-white);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .nav-brand span { color: var(--crimson-lt); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--slate-lt); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 4rem 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .page-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--slate-lt);
+      margin-bottom: 0.8rem;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .page-desc {
+      font-size: 1rem;
+      color: var(--warm-gray);
+      max-width: 560px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2rem 0;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+      margin-right: 0.5rem;
+    }
+
+    .filter-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--mid-gray);
+      background: transparent;
+      color: var(--warm-gray);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--slate-lt);
+      color: var(--slate-lt);
+    }
+
+    .filter-btn.active {
+      background: var(--crimson);
+      border-color: var(--crimson);
+      color: var(--off-white);
+    }
+
+    /* ── SORT ROW ── */
+    .sort-row {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .sort-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+
+    .sort-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      color: var(--warm-gray);
+      cursor: pointer;
+      padding: 0.2rem 0;
+      border-bottom: 1px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .sort-btn.active {
+      color: var(--slate-lt);
+      border-bottom-color: var(--slate-lt);
+    }
+
+    .sort-divider {
+      color: var(--mid-gray);
+      font-size: 0.7rem;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .archive-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    /* ── SERIES GROUP ── */
+    .series-group {
+      margin-bottom: 4rem;
+    }
+
+    .series-group[data-series="hidden"] { display: none; }
+
+    .series-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .series-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--off-white);
+    }
+
+    .series-meta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid-gray);
+    }
+
+    /* ── ARTICLE CARDS ── */
+    .articles {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .article-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .article-card:hover { background: rgba(255,255,255,0.02); }
+    .article-card:hover .article-title { color: var(--slate-lt); }
+
+    .article-left { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .article-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    .article-tag.tag-paid { color: var(--crimson-lt); }
+
+    .article-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--off-white);
+      line-height: 1.4;
+      transition: color 0.15s;
+    }
+
+    .article-desc {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      line-height: 1.5;
+      margin-top: 0.1rem;
+    }
+
+    .article-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.3rem;
+      flex-shrink: 0;
+      padding-top: 0.2rem;
+    }
+
+    .article-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--mid-gray);
+      white-space: nowrap;
+    }
+
+    .badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+    }
+
+    .badge-paid {
+      background: rgba(122,26,26,0.3);
+      color: var(--crimson-lt);
+      border: 1px solid rgba(122,26,26,0.5);
+    }
+
+    .badge-free {
+      background: rgba(77,124,138,0.15);
+      color: var(--slate-lt);
+      border: 1px solid rgba(77,124,138,0.3);
+    }
+
+    /* ── SUBSTACK CTA ── */
+    .substack-cta {
+      margin-top: 3rem;
+      padding: 2.5rem;
+      border: 1px solid var(--mid-gray);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-text-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--slate-lt);
+      margin-bottom: 0.4rem;
+    }
+
+    .cta-text-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-text-desc {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      text-decoration: none;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .btn-crimson { background: var(--crimson); color: var(--off-white); }
+    .btn-crimson:hover { background: var(--crimson-lt); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--mid-gray);
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .footer-brand span { color: var(--crimson-lt); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--mid-gray);
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .article-card { grid-template-columns: 1fr; }
+      .article-right { flex-direction: row; align-items: center; }
+      nav { padding: 1rem; }
+      .page-header, .filter-bar, .sort-row, .archive-wrapper { padding-left: 1.2rem; padding-right: 1.2rem; }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ── NAV ── -->
+
+  <nav>
+    <a href="https://wild-tomorrow.com" class="nav-brand">Wild<span>Tomorrow</span></a>
+    <div class="nav-links">
+      <a href="https://briefing.wild-tomorrow.com">Daily Brief</a>
+      <a href="#" class="active">Archive</a>
+      <a href="#">Podcast</a>
+      <a href="#">Rehabbers</a>
+      <a href="#">Resources</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── PAGE HEADER ── */
+  <header class="page-header">
+    <div class="page-eyebrow">WildTomorrow</div>
+    <h1 class="page-title">Article Archive</h1>
+    <p class="page-desc">Investigative journalism, opinion, and field reporting on wildlife, conservation policy, and the people fighting for both. By Katie Byers.</p>
+  </header>
+
+  <!-- ── FILTERS ── -->
+
+  <div class="filter-bar">
+    <span class="filter-label">Filter by series:</span>
+    <button class="filter-btn active" onclick="filterSeries('all', this)">All</button>
+    <button class="filter-btn" onclick="filterSeries('top', this)">Top Stories</button>
+    <button class="filter-btn" onclick="filterSeries('dirty-secrets', this)">Conservation's Dirty Secrets</button>
+    <button class="filter-btn" onclick="filterSeries('zoo', this)">The Zoo Question</button>
+    <button class="filter-btn" onclick="filterSeries('barrio', this)">Barrio Energy</button>
+    <button class="filter-btn" onclick="filterSeries('shell', this)">Shell Game</button>
+    <button class="filter-btn" onclick="filterSeries('esa', this)">ESA / God Squad</button>
+    <button class="filter-btn" onclick="filterSeries('rehab', this)">Wildlife Rehab</button>
+    <button class="filter-btn" onclick="filterSeries('opinion', this)">Opinion</button>
+    <button class="filter-btn" onclick="filterSeries('wins', this)">Wild Wins</button>
+  </div>
+
+  <div class="sort-row">
+    <span class="sort-label">Sort:</span>
+    <button class="sort-btn active" id="sort-newest" onclick="sortBy('newest', this)">Newest First</button>
+    <span class="sort-divider">·</span>
+    <button class="sort-btn" id="sort-series" onclick="sortBy('series', this)">By Series</button>
+  </div>
+
+  <!-- ── ARCHIVE CONTENT ── -->
+
+  <main class="archive-wrapper">
+
+```
+<!-- ═══════════════════════════════════
+     TOP PERFORMERS (pinned section)
+════════════════════════════════════ -->
+<div class="series-group" data-series="top">
+  <div class="series-header">
+    <div class="series-name">Most-Read Stories</div>
+    <div class="series-meta">Free to read</div>
+  </div>
+  <div class="articles">
+
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/texas-is-about-to-restructure-wildlife" target="_blank" data-date="2026-04-30" data-series="top rehab">
+      <div class="article-left">
+        <div class="article-tag">Wildlife Rehab · Policy</div>
+        <div class="article-title">Texas Is About to Restructure Wildlife Rehabilitation. Volunteers Are Going to Bear the Cost.</div>
+        <div class="article-desc">Texas Parks and Wildlife Commission will vote on a proposal to rewrite rehabilitation rules, introducing a four-tier permit system and restricting non-releasable wildlife housing.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 30, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/you-can-now-clean-a-deer-in-a-national" target="_blank" data-date="2026-05-10" data-series="top opinion">
+      <div class="article-left">
+        <div class="article-tag">Policy · Public Lands</div>
+        <div class="article-title">You Can Now Clean a Deer in a National Park Bathroom. That Is Not a Metaphor.</div>
+        <div class="article-desc">A new Interior Department order is stripping hunting restrictions from 55 federal sites. Here is what changed, where, and why it matters beyond the headlines.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">May 10, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/carved-alive-when-wildlife-cruelty" target="_blank" data-date="2026-04-15" data-series="top">
+      <div class="article-left">
+        <div class="article-tag">Wildlife Law · Investigative</div>
+        <div class="article-title">Carved Alive: When Wildlife Cruelty Falls Through the Legal Cracks</div>
+        <div class="article-desc">A prehistoric fish mutilated at Lake of the Ozarks exposes the gap between outrage and accountability in American wildlife law.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 15, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/the-unicorn-problem-when-cruelty" target="_blank" data-date="2026-04-19" data-series="top">
+      <div class="article-left">
+        <div class="article-tag">Animal Welfare · Investigative</div>
+        <div class="article-title">The Unicorn Problem: When Cruelty Doesn't Look Like Cruelty</div>
+        <div class="article-desc">How a surgically altered goat named Lancelot exposed the limits of animal welfare law, and the questions we still refuse to ask about the bodies we reshape for our own pleasure.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 19, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/the-raccoon-relocation-problem-why" target="_blank" data-date="2026-04-21" data-series="top rehab">
+      <div class="article-left">
+        <div class="article-tag">Wildlife Rehab · Field Reporting</div>
+        <div class="article-title">The Raccoon Relocation Problem: Why "Catch and Release" Is Not What You Think It Is</div>
+        <div class="article-desc">It sounds kind. It is not kind. And in Texas, it is also illegal. Let's talk about it.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 21, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     CONSERVATION'S DIRTY SECRETS
+════════════════════════════════════ -->
+<div class="series-group" data-series="dirty-secrets">
+  <div class="series-header">
+    <div class="series-name">Conservation's Dirty Secrets</div>
+    <div class="series-meta">8-Part Series · Jan – Mar 2026 · Subscribers</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-01-12" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 1</div>
+        <div class="article-title">Where Your Donation Money Actually Goes (Spoiler: Not to Wildlife)</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Jan 12, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-01-19" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 2</div>
+        <div class="article-title">The Celebrity Conservation Con: Why Famous Faces Won't Save Wildlife</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Jan 19, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-01-26" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 3</div>
+        <div class="article-title">Green Colonialism: How Big Conservation Displaces Indigenous Peoples</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Jan 26, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-02" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 4</div>
+        <div class="article-title">The Charismatic Megafauna Scam: Why Pandas Get Millions While Species Go Extinct</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 2, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-09" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 5</div>
+        <div class="article-title">Volunteer Labor: How Conservation Orgs Exploit Free Work</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 9, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-16" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 6</div>
+        <div class="article-title">Greenwashing: When Corporations Buy Conservation Credentials</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 16, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-23" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 7</div>
+        <div class="article-title">The Certification Racket: Eco-Labels That Mean Nothing</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 23, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-02" data-series="dirty-secrets">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Finale</div>
+        <div class="article-title">What Actually Works (And Why Nobody Funds It)</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 2, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     THE ZOO QUESTION
+════════════════════════════════════ -->
+<div class="series-group" data-series="zoo">
+  <div class="series-header">
+    <div class="series-name">The Zoo Question</div>
+    <div class="series-meta">5-Part Series · Mar – Apr 2026 · Subscribers</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-09" data-series="zoo">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 1</div>
+        <div class="article-title">The Zoo Industrial Complex: Accreditation Gaps, Captive Breeding Failures, the SSP's Actual Record</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 9, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-16" data-series="zoo">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 2</div>
+        <div class="article-title">When Captive Breeding Programs Fail: The Species We Were Supposed to Save That Are Still Gone</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 16, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-23" data-series="zoo">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 3</div>
+        <div class="article-title">The Export Economy: Where Zoo-Bred "Surplus" Animals Go and the Legal Gray Zones in the Exotic Animal Trade</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 23, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-30" data-series="zoo">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 4</div>
+        <div class="article-title">The Rewilding Backlash: Why the People Whose Land It Is Often Hate the Animals We're Trying to Return</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 30, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-08" data-series="zoo">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Finale</div>
+        <div class="article-title">I've Done Work in Captive Wildlife Care and I Still Don't Have a Clean Answer</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 8, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     BARRIO ENERGY
+════════════════════════════════════ -->
+<div class="series-group" data-series="barrio">
+  <div class="series-header">
+    <div class="series-name">Barrio Energy Investigation</div>
+    <div class="series-meta">Multi-Part · Mar – May 2026 · Subscribers</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-30" data-series="barrio">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 1</div>
+        <div class="article-title">Bitcoin in the Birding Capital: What Barrio Energy Isn't Telling Matagorda County</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 30, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-31" data-series="barrio">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 2</div>
+        <div class="article-title">What Happened in Granbury Is Already on Its Way Here</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 31, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-01" data-series="barrio">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Breaking</div>
+        <div class="article-title">The Third Site, and the One That's Already Running</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 1, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-05-09" data-series="barrio">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 5</div>
+        <div class="article-title">The Paper Trail They Didn't Expect Anyone to Read</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">May 9, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SHELL GAME
+════════════════════════════════════ -->
+<div class="series-group" data-series="shell">
+  <div class="series-header">
+    <div class="series-name">Shell Game: The Slow Collapse of Texas Oyster Reefs</div>
+    <div class="series-meta">Ongoing · Apr 2026 – Present</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-15" data-series="shell">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 1</div>
+        <div class="article-title">What the Bay Used to Sound Like</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 15, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-20" data-series="shell">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 2</div>
+        <div class="article-title">What's in the Water</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 20, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-29" data-series="shell">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 3</div>
+        <div class="article-title">A Hundred Ways to Kill a Reef</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 29, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-05-04" data-series="shell">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Part 4</div>
+        <div class="article-title">The Permits That Let It Happen</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">May 4, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     ESA / GOD SQUAD
+════════════════════════════════════ -->
+<div class="series-group" data-series="esa">
+  <div class="series-header">
+    <div class="series-name">ESA &amp; God Squad Coverage</div>
+    <div class="series-meta">Mar – Apr 2026 · Subscribers</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-12" data-series="esa">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Breaking</div>
+        <div class="article-title">The Trump Administration Just Moved to Kill the Only Thing Keeping Right Whales from Vessel Strikes</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 12, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-19" data-series="esa">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Investigative</div>
+        <div class="article-title">The Trump Administration Just Invoked a Committee Last Used in 1992 to Override Endangered Species Law — For a Whale With 51 Individuals Left</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 19, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-01" data-series="esa">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Breaking</div>
+        <div class="article-title">They Voted. It Took 32 Minutes.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 1, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-05-01" data-series="esa">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">The ESA Is 50 Years Old and We're Still Arguing About Whether It Should Exist</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">May 1, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     WILDLIFE REHAB FEATURES
+════════════════════════════════════ -->
+<div class="series-group" data-series="rehab">
+  <div class="series-header">
+    <div class="series-name">Wildlife Rehab Features</div>
+    <div class="series-meta">Standalone · 2026</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/texas-is-about-to-restructure-wildlife" target="_blank" data-date="2026-04-30" data-series="rehab top">
+      <div class="article-left">
+        <div class="article-tag">Policy · Field Reporting</div>
+        <div class="article-title">Texas Is About to Restructure Wildlife Rehabilitation. Volunteers Are Going to Bear the Cost.</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 30, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com/p/the-raccoon-relocation-problem-why" target="_blank" data-date="2026-04-21" data-series="rehab top">
+      <div class="article-left">
+        <div class="article-tag">Field Reporting</div>
+        <div class="article-title">The Raccoon Relocation Problem: Why "Catch and Release" Is Not What You Think It Is</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 21, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-25" data-series="rehab opinion">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">Rehabilitator Burnout Is a Policy Failure, Not a Personal One</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 25, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-15" data-series="rehab">
+      <div class="article-left">
+        <div class="article-tag">Field Guide</div>
+        <div class="article-title">What to Do When You Find a Wild Animal</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 15, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     OPINION
+════════════════════════════════════ -->
+<div class="series-group" data-series="opinion">
+  <div class="series-header">
+    <div class="series-name">Opinion &amp; Commentary</div>
+    <div class="series-meta">Standalone · 2026</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-05-01" data-series="opinion esa">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">The ESA Is 50 Years Old and We're Still Arguing About Whether It Should Exist</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">May 1, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-25" data-series="opinion rehab">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">Rehabilitator Burnout Is a Policy Failure, Not a Personal One</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 25, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-04" data-series="opinion">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">Stop Yelling at Your Neighbor About AI and Start Looking at the Corporations Actually Destroying Ecosystems</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 4, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-07" data-series="opinion">
+      <div class="article-left">
+        <div class="article-tag">Opinion</div>
+        <div class="article-title">Why 2000s Dad Rock Might Save Ranching (And Coyotes)</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 7, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     WILD WINS
+════════════════════════════════════ -->
+<div class="series-group" data-series="wins">
+  <div class="series-header">
+    <div class="series-name">Wild Wins</div>
+    <div class="series-meta">Ongoing Series · Feb 2026 – Present · Subscribers</div>
+  </div>
+  <div class="articles">
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-30" data-series="wins">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Wild Wins · April 2026</div>
+        <div class="article-title">Wild Wins: April 2026's Best</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 30, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-04-07" data-series="wins">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Wild Wins Podcast · March 2026</div>
+        <div class="article-title">A Sturgeon, Four Rhinos, and $3.8 Billion</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Apr 7, 2026</div>
+        <div class="badge badge-free">Free</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-03-26" data-series="wins">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Wild Wins Vol. 6</div>
+        <div class="article-title">Texas Gulf Coast Special</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Mar 26, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+    <a class="article-card" href="https://wildtomorrow.substack.com" target="_blank" data-date="2026-02-08" data-series="wins">
+      <div class="article-left">
+        <div class="article-tag tag-paid">Wild Wins Vol. 1</div>
+        <div class="article-title">Land Back, Species Forward</div>
+      </div>
+      <div class="article-right">
+        <div class="article-date">Feb 8, 2026</div>
+        <div class="badge badge-paid">Subscribers</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ── SUBSCRIBE CTA ── -->
+<div class="substack-cta">
+  <div>
+    <div class="cta-text-eyebrow">Go deeper</div>
+    <div class="cta-text-title">Most of this archive is subscriber-supported.</div>
+    <p class="cta-text-desc">No corporate sponsors. No advertisers. If this journalism matters to you, a subscription keeps it independent and keeps it coming.</p>
+  </div>
+  <a href="https://wildtomorrow.substack.com" target="_blank" class="btn btn-crimson">Subscribe on Substack</a>
+</div>
+```
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+
+  <footer>
+    <div class="footer-brand">Wild<span>Tomorrow</span></div>
+    <div class="footer-copy">&copy; 2026 Katie Byers / WildTomorrow &nbsp;·&nbsp; Coexistence Today for a Wild Tomorrow</div>
+  </footer>
+
+  <script>
+    // ── FILTER BY SERIES ──
+    function filterSeries(series, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.series-group').forEach(group => {
+        if (series === 'all') {
+          group.style.display = '';
+        } else {
+          const s = group.getAttribute('data-series') || '';
+          group.style.display = s.includes(series) ? '' : 'none';
+        }
+      });
+    }
+
+    // ── SORT ──
+    function sortBy(mode, btn) {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const wrapper = document.querySelector('.archive-wrapper');
+      const cta = wrapper.querySelector('.substack-cta');
+      const groups = Array.from(wrapper.querySelectorAll('.series-group'));
+
+      if (mode === 'newest') {
+        // Flatten all cards, sort by date, rebuild as single group
+        const allCards = [];
+        groups.forEach(g => {
+          g.querySelectorAll('.article-card').forEach(card => {
+            allCards.push({ date: card.getAttribute('data-date'), el: card.cloneNode(true) });
+          });
+          g.remove();
+        });
+        allCards.sort((a, b) => b.date.localeCompare(a.date));
+
+        const flatGroup = document.createElement('div');
+        flatGroup.className = 'series-group';
+        flatGroup.setAttribute('data-series', 'all-flat');
+        flatGroup.innerHTML = `<div class="series-header"><div class="series-name">All Articles</div><div class="series-meta">Newest first</div></div><div class="articles"></div>`;
+        const articlesDiv = flatGroup.querySelector('.articles');
+        allCards.forEach(({ el }) => articlesDiv.appendChild(el));
+        wrapper.insertBefore(flatGroup, cta);
+
+      } else {
+        // Remove flat view, restore series groups
+        const flat = wrapper.querySelector('[data-series="all-flat"]');
+        if (flat) flat.remove();
+        groups.forEach(g => wrapper.insertBefore(g, cta));
+      }
+    }
+  </script>
+
+</body>
+</html>
